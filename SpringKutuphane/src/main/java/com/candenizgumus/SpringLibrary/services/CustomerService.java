@@ -35,4 +35,8 @@ public class CustomerService extends ServiceManager<Customer,Long>
     }
 
 
+    public Optional<Customer> findByUsername(String username)
+    {
+        return customerRepository.findByUsername(username);
+    }
 }

@@ -26,5 +26,5 @@ public class Customer
     String identityno;
     Double balance;
     @Enumerated(EnumType.STRING)
-    UserType userType;
+    UserType usertype;
 }

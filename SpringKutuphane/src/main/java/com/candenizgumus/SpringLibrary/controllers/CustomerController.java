@@ -1,9 +1,8 @@
 package com.candenizgumus.SpringLibrary.controllers;
 
-import com.candenizgumus.SpringLibrary.dto.LoginDTO;
-import com.candenizgumus.SpringLibrary.entities.Book;
+
+
 import com.candenizgumus.SpringLibrary.entities.Customer;
-import com.candenizgumus.SpringLibrary.services.BookService;
 import com.candenizgumus.SpringLibrary.services.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +32,14 @@ public class CustomerController
 
     @PostMapping("/login")
     @CrossOrigin("*")
-    public ResponseEntity<Boolean> login(@RequestBody LoginDTO loginDTO) {
-        return customerService.login(loginDTO.getUsername(), loginDTO.getPassword());
+    public ResponseEntity<Boolean> login(String username, String password) {
+        return customerService.login(username,password);
+    }
+
+    @GetMapping("/finduser")
+    @CrossOrigin("*")
+    public ResponseEntity<Customer> findByUsername(String username){
+        return ResponseEntity.ok(customerService.findByUsername(username).get());
     }
 
 
