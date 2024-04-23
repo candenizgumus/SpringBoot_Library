@@ -20,6 +20,8 @@ public class RentService extends ServiceManager<Rent, Long>
     private final CustomerService customerService;
 
     //TODO Metodların içindeki sout metinlerini exception olarak çevirip hata fırlatmak lazım
+    //TODO Admin entitysi lazım
+
     @Override
     public Rent save(Rent rent)
     {
