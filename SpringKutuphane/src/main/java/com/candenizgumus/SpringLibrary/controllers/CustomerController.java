@@ -1,5 +1,6 @@
 package com.candenizgumus.SpringLibrary.controllers;
 
+import com.candenizgumus.SpringLibrary.dto.LoginDTO;
 import com.candenizgumus.SpringLibrary.entities.Book;
 import com.candenizgumus.SpringLibrary.entities.Customer;
 import com.candenizgumus.SpringLibrary.services.BookService;
@@ -32,8 +33,8 @@ public class CustomerController
 
     @PostMapping("/login")
     @CrossOrigin("*")
-    public ResponseEntity<Boolean> login(@RequestParam String username, @RequestParam String password) {
-        return customerService.login(username, password);
+    public ResponseEntity<Boolean> login(@RequestBody LoginDTO loginDTO) {
+        return customerService.login(loginDTO.getUsername(), loginDTO.getPassword());
     }
 
 

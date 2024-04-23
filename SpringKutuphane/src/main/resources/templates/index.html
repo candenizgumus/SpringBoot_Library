@@ -11,9 +11,9 @@
     <div class="row">
         <div class="col-12">
 
-            <form onsubmit="loginUser()">
+            <form >
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username" >Username</label>
                     <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter username">
                 </div>
                 <div class="form-group">
@@ -24,7 +24,7 @@
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button onclick="loginUser()" type="submit" class="btn btn-primary">Submit</button>
             </form>
 
         </div>
@@ -45,31 +45,25 @@
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
-        fetch('http://localhost:9090/customer/login', {
+        fetch('http://localhost:9090/customer/login',{
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type":"application/json"
             },
             body: JSON.stringify({
-                username: username,
-                password: password
-            })
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                username,
+                password})
+        }).then(data=>data.json())
+            .then(data=>{
+                if(data){
+                    alert('Giriş başarılı')
+                } else{
+                    alert('Kullanıcı adı ya da şifre hatalı')
                 }
-                return response.json();
-            })
-            .then(data => {
-                console.log(data); // Sunucudan gelen verileri konsola yazdır
-                showNotification("Login Successful!"); // Bildirim göster
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-                showNotification("Login Failed!"); // Hata durumunda bildirim göster
             });
     }
+
+
 
     // Bildirim gösterme fonksiyonu
     function showNotification(message) {
