@@ -16,6 +16,8 @@ public class BookService extends ServiceManager<Book,Long>
         this.repository = repository;
     }
 
+
+
     public Book save2(String title, String authorname, Integer pagenumber){
         return repository.save(Book.builder().title(title).authorname(authorname).pagenumber(pagenumber).build());
     }

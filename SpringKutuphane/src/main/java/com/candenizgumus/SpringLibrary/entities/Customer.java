@@ -1,6 +1,5 @@
 package com.candenizgumus.SpringLibrary.entities;
 
-import com.candenizgumus.SpringLibrary.entities.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,18 +11,17 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Entity
-@Table(name = "tblbook")
-public class Book
+@Table(name = "tblcustomer")
+public class Customer
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String title;
-    String authorname;
-    Integer pagenumber;
-    String genre;
-    @Enumerated(EnumType.STRING)
-    Status status;
-    Double price;
-
+    @Column(unique = true)
+    String username;
+    String password;
+    String name;
+    @Column(unique = true)
+    String identityno;
+    Double balance;
 }

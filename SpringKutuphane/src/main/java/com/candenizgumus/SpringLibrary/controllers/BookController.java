@@ -21,10 +21,10 @@ public class BookController
         return ResponseEntity.ok(kitapService.save(kitap));
     }
 
-    @PostMapping("/save2")
+   /* @PostMapping("/save2")
     public ResponseEntity<Book> save2(String title, String authorname, @RequestParam(defaultValue = "0") @Nullable Integer pagenumber){
         return ResponseEntity.ok(kitapService.save2(title, authorname, pagenumber));
-    }
+    }*/
 
     @GetMapping("/findall")
     public ResponseEntity<List<Book>> findAll(){
