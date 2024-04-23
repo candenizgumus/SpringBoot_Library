@@ -16,9 +16,10 @@ import java.util.Optional;
 public class RentService extends ServiceManager<Rent, Long>
 {
     private final RentRepository rentRepository;
-    private final BookRepository bookRepository;
-    private final CustomerRepository customerRepository;
+    private final BookService bookService;
+    private final CustomerService customerService;
 
+    //TODO Metodların içindeki sout metinlerini exception olarak çevirip hata fırlatmak lazım
     @Override
     public Rent save(Rent rent)
     {
@@ -34,8 +35,8 @@ public class RentService extends ServiceManager<Rent, Long>
 
     private boolean rentChecks(Rent rent)
     {
-        Optional<Book> book = bookRepository.findById(rent.getBook().getId());
-        Optional<Customer> customer = customerRepository.findById(rent.getCustomer().getId());
+        Optional<Book> book = bookService.findById(rent.getBook().getId());
+        Optional<Customer> customer = customerService.findById(rent.getCustomer().getId());
 
         if (book.isEmpty() || customer.isEmpty())
         {
@@ -57,21 +58,21 @@ public class RentService extends ServiceManager<Rent, Long>
 
     private void rentProcesses(Rent rent)
     {
-        Optional<Book> book = bookRepository.findById(rent.getBook().getId());
-        Optional<Customer> customer = customerRepository.findById(rent.getCustomer().getId());
+        Optional<Book> book = bookService.findById(rent.getBook().getId());
+        Optional<Customer> customer = customerService.findById(rent.getCustomer().getId());
 
         book.get().setStatus(Status.RENTED);
         customer.get().setBalance(customer.get().getBalance()-book.get().getPrice());
     }
 
 
-    public RentService(RentRepository rentRepository, BookRepository bookRepository, CustomerRepository customerRepository)
+    public RentService(RentRepository rentRepository, BookService bookService, CustomerService customerService)
     {
         super(rentRepository);
         this.rentRepository = rentRepository;
-        this.bookRepository = bookRepository;
+        this.bookService = bookService;
 
-        this.customerRepository = customerRepository;
+        this.customerService = customerService;
     }
 
 
