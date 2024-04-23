@@ -30,5 +30,12 @@ public class CustomerController
         return ResponseEntity.ok(customerService.findAll());
     }
 
+    @PostMapping("/login")
+    @CrossOrigin("*")
+    public ResponseEntity<Boolean> login(@RequestParam String username, @RequestParam String password) {
+        return customerService.login(username, password);
+    }
+
+
 
 }
